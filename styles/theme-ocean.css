@@ -1,0 +1,77 @@
+/* ════════════════════════════════════════════════════════════
+   THÈME : OCEAN  ·  cyan / bleu profond
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --cyan: #00e5ff;
+  --blue: #2f6bff;
+  --teal: #14ffd6;
+  --ice: #d7f7ff;
+  --bg: #01060f;
+  --card: #061325;
+  --muted: #b9cfe4;
+
+  --text: #ffffff;
+  --text-soft: #d6e8f7;
+  --text-banner: #eef8ff;
+  --heading: #bfe9ff;
+  --footer-text: #8fa9c4;
+
+  --accent: #2fbaff;
+  --accent-strong: #17a2f0;
+  --accent-line-strong: #0f7fd1;
+  --field-border: #1e5fa0;
+  --focus: #14ffd6;
+  --focus-glow: #14ffd633;
+
+  --gold: #6ff2ff;
+  --gold-text: #8ef6ff;
+  --gold-glow: #00d5ff;
+  --gold-inner: #00d5ff40;
+
+  --surface-translucent: #03101feb;
+  --dock-bg: #03101ff5;
+  --dock-active-bg: #062b47;
+  --outline-bg: #04101f;
+  --count-bg: #05203a;
+  --notice-bg: #05203a;
+  --qty-bg: #06253f;
+  --badge-bg: #03101fd9;
+  --veil: #000000dd;
+  --divider: #12314f;
+
+  --thumb-from: #0d3a5e;
+  --thumb-mid: #08203c;
+  --thumb-to: #03101f;
+  --thumb-line: #15618f;
+  --gallery-bg: #03101f;
+  --sheen-a: #00b4ff1f;
+  --sheen-b: #14ffd61a;
+  --product-from: #07182c;
+  --product-to: #030c18;
+
+  --banner-from: #041120f5;
+  --banner-mid: #063059e8;
+  --banner-to: #04162ce8;
+  --banner-inner: #0a5a8c22;
+  --ring-line: #2fe6ff55;
+
+  --glow-top: #0a3f73;
+  --glow-side: #062f5e;
+  --glow-faint: #00b4ff25;
+  --glow-soft: #0f9bff35;
+  --glow-medium: #00c8ff65;
+  --glow-strong: #00d5ff55;
+
+  --primary-from: #0a7bd6;
+  --primary-mid: #00b4ff;
+  --primary-to: #14ffd6;
+  --btn-border: #6ff2ff;
+  --btn-text: #02202e;
+  --btn-text-shadow: #ffffff40;
+  --btn-highlight: #ffffff66;
+
+  --video-bg: #000000;
+
+  --theme-color: #01060f;
+}

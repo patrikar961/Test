@@ -1,0 +1,87 @@
+/* ════════════════════════════════════════════════════════════
+   THÈME : VIOLET  (thème d'origine)
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Couleurs brutes du thème */
+  --violet: #a100ff;
+  --pink: #ff25f5;
+  --blue: #12d9ff;
+  --yellow: #ffd936;
+  --bg: #03030d;
+  --card: #08091b;
+  --muted: #c3c4df;
+
+  /* ── Texte ── */
+  --text: #ffffff;
+  --text-soft: #d9d8f5;
+  --text-banner: #f4f1ff;
+  --heading: #e6c8ff;
+  --footer-text: #a6a0c7;
+
+  /* ── Accents ── */
+  --accent: #c33cff;
+  --accent-strong: #a42aff;
+  --accent-line-strong: #8d22ff;
+  --field-border: #7137c9;
+  --focus: #12d9ff;
+  --focus-glow: #12d9ff33;
+
+  /* ── Or / prix ── */
+  --gold: #ffb82e;
+  --gold-text: #ffd936;
+  --gold-glow: #ff9d00;
+  --gold-inner: #ff9d0040;
+
+  /* ── Fonds ── */
+  --surface-translucent: #050514ed;
+  --dock-bg: #050513f5;
+  --dock-active-bg: #210c3e;
+  --outline-bg: #050515;
+  --count-bg: #100722;
+  --notice-bg: #100a25;
+  --qty-bg: #150b2b;
+  --badge-bg: #050514d9;
+  --veil: #000000dd;
+  --divider: #272144;
+
+  /* ── Vignettes produit ── */
+  --thumb-from: #36205f;
+  --thumb-mid: #11122d;
+  --thumb-to: #070817;
+  --thumb-line: #4d2180;
+  --gallery-bg: #05051a;
+  --sheen-a: #8e20ff18;
+  --sheen-b: #12d9ff14;
+  --product-from: #0a0b20;
+  --product-to: #050510;
+
+  /* ── Bannière ── */
+  --banner-from: #09091cf5;
+  --banner-mid: #24064be8;
+  --banner-to: #070a2ce8;
+  --banner-inner: #5b13a522;
+  --ring-line: #ff38ed55;
+
+  /* ── Ambiance / halos ── */
+  --glow-top: #3b086b;
+  --glow-side: #071b58;
+  --glow-faint: #9a00ff25;
+  --glow-soft: #9d21ff35;
+  --glow-medium: #b400ff65;
+  --glow-strong: #a100ff55;
+
+  /* ── Boutons principaux ── */
+  --primary-from: #7d00ff;
+  --primary-mid: #d20cff;
+  --primary-to: #ff26d8;
+  --btn-border: #ff70ff;
+  --btn-text: #ffffff;
+  --btn-text-shadow: #3c0055;
+  --btn-highlight: #ffffff55;
+
+  /* ── Navigateur / barre d'état mobile ── */
+  --video-bg: #000000;
+
+  --theme-color: #03030d;
+}

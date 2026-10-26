@@ -1,0 +1,78 @@
+/* ════════════════════════════════════════════════════════════
+   THÈME : MIDNIGHT  ·  indigo nuit / améthyste
+   Variante sobre du thème violet.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --indigo: #4b5cff;
+  --amethyst: #9a6bff;
+  --sky: #7fd4ff;
+  --sand: #ffd98a;
+  --bg: #04050f;
+  --card: #0b0d1f;
+  --muted: #bcbedb;
+
+  --text: #ffffff;
+  --text-soft: #d8daf2;
+  --text-banner: #f1f2ff;
+  --heading: #cfd3ff;
+  --footer-text: #8e91b5;
+
+  --accent: #7a6bff;
+  --accent-strong: #5f4cf0;
+  --accent-line-strong: #4a36cf;
+  --field-border: #34328a;
+  --focus: #7fd4ff;
+  --focus-glow: #7fd4ff33;
+
+  --gold: #ffd98a;
+  --gold-text: #ffd98a;
+  --gold-glow: #ffb84d;
+  --gold-inner: #ffb84d40;
+
+  --surface-translucent: #06081aeb;
+  --dock-bg: #06081af5;
+  --dock-active-bg: #1a1a52;
+  --outline-bg: #06081a;
+  --count-bg: #12143a;
+  --notice-bg: #12143a;
+  --qty-bg: #161840;
+  --badge-bg: #06081ad9;
+  --veil: #000000dd;
+  --divider: #1f2154;
+
+  --thumb-from: #232a6b;
+  --thumb-mid: #12152f;
+  --thumb-to: #06081a;
+  --thumb-line: #3a3f8f;
+  --gallery-bg: #06081a;
+  --sheen-a: #4b5cff1f;
+  --sheen-b: #7fd4ff1a;
+  --product-from: #0d1028;
+  --product-to: #05060f;
+
+  --banner-from: #080a1cf5;
+  --banner-mid: #191a52e8;
+  --banner-to: #0a0d2ae8;
+  --banner-inner: #3a2a9a22;
+  --ring-line: #9a6bff55;
+
+  --glow-top: #2a1f7a;
+  --glow-side: #16235e;
+  --glow-faint: #6b5cff25;
+  --glow-soft: #5f4cf035;
+  --glow-medium: #6b5cff65;
+  --glow-strong: #9a6bff55;
+
+  --primary-from: #3a2bd6;
+  --primary-mid: #6b5cff;
+  --primary-to: #9a6bff;
+  --btn-border: #b9aaff;
+  --btn-text: #ffffff;
+  --btn-text-shadow: #150a4d;
+  --btn-highlight: #ffffff55;
+
+  --video-bg: #000000;
+
+  --theme-color: #04050f;
+}

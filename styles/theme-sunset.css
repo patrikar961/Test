@@ -1,0 +1,77 @@
+/* ════════════════════════════════════════════════════════════
+   THÈME : SUNSET  ·  rose / orange / mauve
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --pink: #ff4fa3;
+  --orange: #ff9c4a;
+  --mauve: #b06bff;
+  --peach: #ffe0c9;
+  --bg: #12040f;
+  --card: #240a1e;
+  --muted: #e2bdd4;
+
+  --text: #ffffff;
+  --text-soft: #f7d6e8;
+  --text-banner: #fff2f8;
+  --heading: #ffc2de;
+  --footer-text: #b98aa6;
+
+  --accent: #ff6bab;
+  --accent-strong: #ef4a97;
+  --accent-line-strong: #cc2f7c;
+  --field-border: #8f2f63;
+  --focus: #ff9c4a;
+  --focus-glow: #ff9c4a33;
+
+  --gold: #ffb06a;
+  --gold-text: #ffc487;
+  --gold-glow: #ff8a3c;
+  --gold-inner: #ff8a3c40;
+
+  --surface-translucent: #1c0717eb;
+  --dock-bg: #1c0717f5;
+  --dock-active-bg: #4d1140;
+  --outline-bg: #1c0717;
+  --count-bg: #320d29;
+  --notice-bg: #320d29;
+  --qty-bg: #380f2e;
+  --badge-bg: #1c0717d9;
+  --veil: #000000dd;
+  --divider: #4b1c3c;
+
+  --thumb-from: #55204a;
+  --thumb-mid: #2c0c25;
+  --thumb-to: #150512;
+  --thumb-line: #8f3269;
+  --gallery-bg: #1c0717;
+  --sheen-a: #ff4fa322;
+  --sheen-b: #ff9c4a1a;
+  --product-from: #26091f;
+  --product-to: #11040e;
+
+  --banner-from: #1e0719f5;
+  --banner-mid: #4d0f3be8;
+  --banner-to: #260b22e8;
+  --banner-inner: #a82a7a22;
+  --ring-line: #ff9c4a55;
+
+  --glow-top: #77175b;
+  --glow-side: #5e2a10;
+  --glow-faint: #ff4fa325;
+  --glow-soft: #ff3c9635;
+  --glow-medium: #ff4fa365;
+  --glow-strong: #ff9c4a55;
+
+  --primary-from: #c4257f;
+  --primary-mid: #ff4fa3;
+  --primary-to: #ff9c4a;
+  --btn-border: #ffb6d4;
+  --btn-text: #2b0417;
+  --btn-text-shadow: #ffffff40;
+  --btn-highlight: #ffffff66;
+
+  --video-bg: #000000;
+
+  --theme-color: #12040f;
+}

@@ -1,0 +1,811 @@
+/* ════════════════════════════════════════════════════════════════
+   base.css  ·  mise en page, formes, animations
+   ────────────────────────────────────────────────────────────────
+   Ce fichier ne contient AUCUNE couleur en dur.
+   Tout vient de styles/theme-*.css  →  change de thème en changeant
+   une seule ligne dans index.html.
+   ════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+/* ───────────────  STRUCTURE  ─────────────── */
+
+.app {
+  min-height: 100vh;
+  padding-bottom: 100px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--glow-top) 0, transparent 34%),
+    radial-gradient(ellipse at 100% 35%, var(--glow-side) 0, transparent 36%),
+    var(--bg);
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 13px;
+}
+
+/* ───────────────  EN-TÊTE  ─────────────── */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--surface-translucent);
+  border-bottom: 1px solid var(--accent-line-strong);
+  box-shadow: 0 0 22px var(--glow-soft);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.logo,
+.logo-img {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-text);
+  font-size: 27px;
+  font-weight: 900;
+  text-shadow: 0 0 12px var(--gold-glow);
+  box-shadow: 0 0 10px var(--gold-glow), inset 0 0 12px var(--gold-inner);
+  object-fit: contain;
+}
+
+.brand strong {
+  font-size: clamp(13px, 3.8vw, 19px);
+  letter-spacing: 1.5px;
+}
+
+.brand small {
+  display: block;
+  color: var(--text-soft);
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+
+/* ───────────────  BOUTONS  ─────────────── */
+
+.pill,
+.outline {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 0 10px var(--glow-faint);
+}
+
+.add,
+.primary {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--btn-border);
+  border-radius: 13px;
+  background: linear-gradient(100deg, var(--primary-from), var(--primary-mid) 58%, var(--primary-to));
+  color: var(--btn-text);
+  font-weight: 800;
+  margin-top: 8px;
+  box-shadow: 0 0 13px var(--glow-medium), inset 0 1px var(--btn-highlight);
+  text-shadow: 0 1px 3px var(--btn-text-shadow);
+  transition: filter .15s ease, transform .12s ease;
+}
+
+.add:hover,
+.primary:hover {
+  filter: brightness(1.08);
+}
+
+.add:active,
+.primary:active {
+  transform: scale(.985);
+}
+
+.outline {
+  width: 100%;
+  margin-top: 7px;
+  background: var(--outline-bg);
+  border-color: var(--accent-strong);
+  color: var(--text);
+  padding: 9px;
+}
+
+/* ───────────────  BANNIÈRE D'ACCUEIL  ─────────────── */
+
+.welcome {
+  position: relative;
+  overflow: hidden;
+  padding: 23px 18px;
+  border: 1px solid var(--accent-strong);
+  border-radius: 22px;
+  background: linear-gradient(
+    125deg,
+    var(--banner-from) 10%,
+    var(--banner-mid) 55%,
+    var(--banner-to)
+  );
+  box-shadow: 0 0 22px var(--glow-soft), inset 0 0 20px var(--banner-inner);
+}
+
+.welcome::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -90px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid var(--ring-line);
+  box-shadow: 0 0 30px var(--glow-strong), inset 0 0 30px var(--glow-soft);
+  pointer-events: none;
+}
+
+.welcome-layout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.welcome-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.welcome-logo {
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  padding: 5px;
+  background: var(--card);
+  box-shadow: 0 0 18px var(--glow-strong);
+}
+
+.eyebrow {
+  position: relative;
+  z-index: 1;
+  color: var(--gold-text);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(30px, 7.5vw, 48px);
+  line-height: 1.03;
+  margin: 16px 0;
+}
+
+h1 span {
+  color: var(--gold-text);
+  text-shadow: 0 0 18px var(--gold-glow);
+}
+
+p {
+  line-height: 1.55;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.welcome p {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  color: var(--text-banner);
+  font-size: 14px;
+}
+
+.count {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--text-soft);
+  border: 1px solid var(--accent-strong);
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 13px;
+  background: var(--count-bg);
+  box-shadow: 0 0 12px var(--glow-faint);
+}
+
+/* ───────────────  FORMULAIRES  ─────────────── */
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin: 18px 0;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--field-border);
+  border-radius: 13px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 12px var(--focus-glow);
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  margin: 13px 0;
+}
+
+.field label,
+.product-info label,
+#product-detail label {
+  font-size: 13px;
+  color: var(--text-soft);
+  display: block;
+  margin-top: 10px;
+}
+
+/* ───────────────  GRILLE PRODUITS  ─────────────── */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--accent-strong);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--product-from), var(--product-to));
+  box-shadow: 0 0 12px var(--glow-soft), 0 5px 22px #0009;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.product:active {
+  transform: scale(.985);
+}
+
+.photo {
+  width: 100%;
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: radial-gradient(
+    ellipse at center,
+    var(--thumb-from) 0%,
+    var(--thumb-mid) 55%,
+    var(--thumb-to) 100%
+  );
+  border-bottom: 1px solid var(--thumb-line);
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 8px;
+}
+
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--sheen-a), transparent 45%, var(--sheen-b));
+  pointer-events: none;
+}
+
+.thumb-icon {
+  font-size: 46px;
+  opacity: .85;
+  filter: drop-shadow(0 0 14px var(--glow-strong));
+}
+
+/* petite pastille « 3 médias » sur la vignette */
+.media-badge {
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--badge-bg);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-size: 10px;
+  letter-spacing: .5px;
+  backdrop-filter: blur(6px);
+}
+
+.product-info {
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product h3 {
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 39px;
+  margin: 0;
+  color: var(--text);
+}
+
+.price {
+  color: var(--gold-text);
+  font-size: 20px;
+  font-weight: 900;
+  margin: 8px 0;
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.product-info .add {
+  margin-top: auto;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 24px 0 12px;
+}
+
+.section-title h2 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--heading);
+  margin: 0;
+}
+
+.panel {
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--field-border);
+  border-radius: 18px;
+  margin: 12px 0;
+  box-shadow: 0 0 15px var(--glow-faint);
+}
+
+.panel h3 {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.line:last-child {
+  border-bottom: 0;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty button {
+  background: var(--qty-bg);
+  color: var(--text);
+  border: 1px solid var(--accent-strong);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px;
+}
+
+.notice {
+  padding: 12px;
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  background: var(--notice-bg);
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ───────────────  BARRE DU BAS  ─────────────── */
+
+.dock {
+  position: fixed;
+  z-index: 8;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  max-width: 700px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 7px;
+  background: var(--dock-bg);
+  border: 1px solid var(--accent-strong);
+  border-radius: 22px;
+  box-shadow: 0 0 25px var(--glow-medium);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.dock button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 0;
+  font-size: 11px;
+  border-radius: 12px;
+}
+
+.dock button span {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.dock button.active {
+  color: var(--text);
+  background: var(--dock-active-bg);
+  text-shadow: 0 0 12px var(--glow-strong);
+  box-shadow: inset 0 0 12px var(--glow-soft);
+}
+
+.badge {
+  color: var(--gold-text);
+  font-weight: bold;
+}
+
+.review {
+  border-bottom: 1px solid var(--divider);
+  padding: 12px 0;
+}
+
+.review:last-child {
+  border-bottom: 0;
+}
+
+.review p {
+  margin: 6px 0;
+}
+
+.stars {
+  color: var(--gold-text);
+}
+
+.footer {
+  text-align: center;
+  color: var(--footer-text);
+  font-size: 11px;
+  padding: 25px 0;
+}
+
+/* ───────────────  FICHE PRODUIT  ─────────────── */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  background: var(--veil);
+  align-items: flex-end;
+}
+
+.modal.show {
+  display: flex;
+  animation: fade .18s ease;
+}
+
+.sheet {
+  background: var(--card);
+  border: 1px solid var(--accent-strong);
+  border-radius: 22px 22px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 0 25px var(--glow-strong);
+  animation: slideUp .22s ease;
+}
+
+.sheet h2 {
+  font-size: 20px;
+  margin: 6px 0;
+}
+
+.sheet p {
+  color: var(--text-soft);
+  font-size: 14px;
+}
+
+@keyframes fade {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px) }
+  to   { transform: translateY(0) }
+}
+
+/* ───────────────  DIAPORAMA (galerie)  ─────────────── */
+/*
+   La galerie est un rail horizontal à défilement natif :
+   on glisse au doigt, à la souris ou au trackpad, et chaque
+   « page » = une image ou une vidéo.
+*/
+
+.gallery {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.gallery .track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 14px;
+  background: var(--gallery-bg);
+}
+
+.gallery .track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery .slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 240px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gallery-bg);
+}
+
+.gallery .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+  display: block;
+}
+
+.gallery .slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--video-bg);
+  display: block;
+}
+
+/* Une image qui ne charge pas → on montre une vignette de repli */
+.gallery .slide.slide-error::after {
+  content: "Aperçu indisponible";
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.gallery .slide.slide-error img {
+  display: none;
+}
+
+/* Flèches */
+.gallery .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--badge-bg);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 0 3px;
+  opacity: 0;
+  transition: opacity .18s ease;
+  backdrop-filter: blur(8px);
+}
+
+.gallery.is-multi:hover .arrow,
+.gallery.is-multi:focus-within .arrow {
+  opacity: 1;
+}
+
+.gallery .arrow.prev { left: 8px; }
+.gallery .arrow.next { right: 8px; }
+
+/* Sur écran tactile, les flèches restent visibles */
+@media (hover: none) {
+  .gallery .arrow { opacity: .9; }
+}
+
+/* Points */
+.gallery .dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.gallery .dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: transparent;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.gallery .dot.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.35);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.gallery .page-count {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--badge-bg);
+  border: 1px solid var(--accent);
+  font-size: 11px;
+  letter-spacing: .5px;
+  backdrop-filter: blur(6px);
+}
+
+/* ───────────────  RESPONSIVE  ─────────────── */
+
+@media (min-width: 650px) {
+  .products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .photo { height: 180px; }
+  .gallery .slide { height: 300px; }
+  .wrap { padding: 25px; }
+  .welcome { padding: 30px; }
+}
+
+@media (min-width: 900px) {
+  .welcome { padding: 34px; }
+  .sheet {
+    max-height: 88vh;
+    border-radius: 22px;
+  }
+  .modal { align-items: center; }
+}
+
+@media (max-width: 360px) {
+  .filters { grid-template-columns: 1fr; }
+  .brand strong { letter-spacing: 1px; }
+  .logo,
+  .logo-img { width: 42px; height: 42px; }
+  .welcome-logo { width: 130px; height: 130px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
