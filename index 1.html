@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#03030d">
+<title>Boutique — Template</title>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COULEUR DU SITE  ·  change UNE ligne pour changer de thème
+     ──────────────────────────────────────────────────────────────────
+     styles/theme-violet.css   violet / rose / bleu   (par défaut)
+     styles/theme-ocean.css    cyan / bleu
+     styles/theme-ember.css    rouge / orange / or
+     styles/theme-emerald.css  vert émeraude / citron
+     styles/theme-mono.css     noir & blanc minimal
+     styles/theme-sunset.css   rose / orange / mauve
+     ══════════════════════════════════════════════════════════════════ -->
+<link rel="stylesheet" href="styles/theme-violet.css">
+<link rel="stylesheet" href="styles/base.css">
+</head>
+
+<body>
+<main class="app">
+
+<!-- ─────────── EN-TÊTE (logo texte) ───────────
+     Pour utiliser une image comme logo, remplace le <div class="logo">S</div>
+     par :  <img class="logo-img" src="images/logo.png" alt="logo">          -->
+<header>
+  <div class="brand">
+    <div class="logo">S</div>
+    <div>
+      <strong>MA BOUTIQUE</strong>
+      <small>BOUTIQUE OFFICIELLE</small>
+    </div>
+  </div>
+
+  <button class="pill" onclick="showView('cart')">
+    🛒 <span id="cart-count">0</span>
+  </button>
+</header>
+
+<div class="wrap">
+
+<!-- ═════════════════════════ ACCUEIL ═════════════════════════ -->
+<section class="view active" id="home">
+
+  <div class="welcome">
+    <div class="welcome-layout">
+      <div class="welcome-copy">
+        <div class="eyebrow">♛ BIENVENUE CHEZ MA BOUTIQUE</div>
+
+        <h1>
+          Ta phrase d'accroche.<br>
+          <span>Ta phrase qui claque.</span>
+        </h1>
+
+        <p class="muted">
+          Décris ton activité en une ligne : produits, zone de livraison, délais.
+        </p>
+      </div>
+
+      <!-- Logo rond de la bannière. Retire la ligne si tu n'as pas d'image. -->
+      <img
+        class="welcome-logo"
+        src="images/logo.png"
+        alt="Logo"
+        onerror="this.style.display='none'"
+      >
+    </div>
+  </div>
+
+  <div class="count" id="product-count">0 produits</div>
+
+  <div class="filters">
+    <select id="category" onchange="renderProducts()">
+      <option value="all">Toutes catégories</option>
+      <!-- Les options sont générées automatiquement depuis PRODUCTS.
+           Tu peux aussi les écrire à la main, ce sera écrasé. -->
+    </select>
+
+    <select id="sort" onchange="renderProducts()">
+      <option value="featured">À la une</option>
+      <option value="low">Prix croissant</option>
+      <option value="high">Prix décroissant</option>
+    </select>
+  </div>
+
+  <div class="products" id="products"></div>
+
+  <div class="footer">
+    MA BOUTIQUE · Bonne visite et à bientôt 🤝
+  </div>
+</section>
+
+<!-- ═════════════════════════ PANIER ═════════════════════════ -->
+<section class="view" id="cart">
+  <div class="section-title">
+    <h2>MON PANIER</h2>
+    <button class="outline" onclick="showView('home')">Continuer</button>
+  </div>
+
+  <div class="panel" id="cart-lines"></div>
+
+  <div class="panel">
+    <div class="line">
+      <strong>Total estimé</strong>
+      <strong class="price" id="cart-total">0,00 €</strong>
+    </div>
+    <button class="primary" onclick="goCheckout()">
+      Continuer la commande →
+    </button>
+  </div>
+</section>
+
+<!-- ═════════════════════════ COMMANDE ═════════════════════════ -->
+<section class="view" id="checkout">
+  <div class="section-title">
+    <h2>COMMANDE</h2>
+  </div>
+
+  <form id="order-form" class="panel">
+    <div class="field">
+      <label for="customer">Prénom ou pseudo</label>
+      <input id="customer" required placeholder="Ton nom">
+    </div>
+
+    <div class="field">
+      <label for="phone">Téléphone</label>
+      <input id="phone" type="tel" required placeholder="Ton numéro">
+    </div>
+
+    <div class="field">
+      <label for="address">Adresse</label>
+      <input id="address" required placeholder="Adresse de livraison">
+    </div>
+
+    <div class="field">
+      <label for="delivery">Mode de livraison</label>
+      <select id="delivery">
+        <option>Meet-up</option>
+        <option>Livraison</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="notes">Message complémentaire</label>
+      <textarea id="notes" rows="3" placeholder="Précisions facultatives"></textarea>
+    </div>
+
+    <div class="line">
+      <strong>Total estimé</strong>
+      <strong class="price" id="checkout-total">0,00 €</strong>
+    </div>
+
+    <button class="primary" type="submit">Envoyer ma demande</button>
+  </form>
+</section>
+
+<!-- ═════════════════════════ AVIS ═════════════════════════ -->
+<section class="view" id="reviews">
+  <div class="section-title">
+    <h2>AVIS CLIENTS</h2>
+  </div>
+
+  <div class="panel">
+    <div id="base-reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <strong>Client 691</strong>
+        <p class="muted">Service au top, je recommande 👌</p>
+      </div>
+    </div>
+
+    <div id="new-reviews"></div>
+  </div>
+
+  <form id="review-form" class="panel">
+    <h3>Ajouter un avis</h3>
+
+    <div class="field">
+      <label for="review-name">Prénom</label>
+      <input id="review-name" required>
+    </div>
+
+    <div class="field">
+      <label for="review-score">Note</label>
+      <select id="review-score">
+        <option>5</option>
+        <option>4</option>
+        <option>3</option>
+        <option>2</option>
+        <option>1</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="review-text">Commentaire</label>
+      <textarea id="review-text" required></textarea>
+    </div>
+
+    <button class="primary" type="submit">Ajouter un avis</button>
+  </form>
+</section>
+
+<!-- ═════════════════════════ CONTACT ═════════════════════════ -->
+<section class="view" id="contact">
+  <div class="section-title">
+    <h2>CONTACT</h2>
+  </div>
+
+  <div class="panel">
+    <h3>Contact</h3>
+
+    <p class="muted">
+      Une question ? Retrouve-nous directement sur Telegram.
+    </p>
+
+    <a
+      class="primary"
+      href="https://t.me/"
+      target="_blank"
+      rel="noopener noreferrer"
+      style="display:block;text-align:center;text-decoration:none"
+    >
+      ✈️ Contactez-nous sur Telegram
+    </a>
+  </div>
+</section>
+
+</div>
+
+<!-- ═════════════════════════ BARRE DU BAS ═════════════════════════ -->
+<nav class="dock">
+  <button class="active" data-view="home" onclick="showView('home')">
+    <span>⌂</span>Accueil
+  </button>
+
+  <button data-view="reviews" onclick="showView('reviews')">
+    <span>☆</span>Avis
+  </button>
+
+  <button data-view="cart" onclick="showView('cart')">
+    <span>🛒</span>Panier
+    <span class="badge" id="dock-count">0</span>
+  </button>
+
+  <button data-view="contact" onclick="showView('contact')">
+    <span>✉</span>Contact
+  </button>
+</nav>
+
+<!-- ═════════════════════════ FICHE PRODUIT ═════════════════════════ -->
+<div class="modal" id="product-modal" onclick="if(event.target===this)closeProduct()">
+  <div class="sheet">
+    <button class="outline" onclick="closeProduct()">Fermer ✕</button>
+    <div id="product-detail"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   1.  LES PRODUITS  ·  c'est le seul endroit à remplir
+   ────────────────────────────────────────────────────────────────────
+   Copie-colle un bloc { ... } autant de fois que tu veux.
+
+   {
+     id:     1,                     // numéro unique
+     name:   "Nom du produit",
+     cat:    "Catégorie",           // crée les filtres automatiquement
+     price:  50,                    // prix de base (utilisé si pas de variants)
+     featured: true,                // optionnel : force l'ordre "À la une"
+
+     media: [                       // LA GALERIE : 2 à 3 pages qui défilent
+       { type: "image", src: "images/produit-1.jpg" },
+       { type: "video", src: "videos/produit.mp4"  },
+       { type: "image", src: "images/produit-2.jpg" }
+     ],
+
+     variants: [                    // optionnel : les formats / quantités
+       { label: "10G — 70 €",  price: 70  },
+       { label: "50G — 300 €", price: 300 }
+     ],
+
+     desc: "Description du produit."
+   }
+
+   — ancien format encore accepté : ─
+   image: "images/x.jpg"   +   video: "videos/x.mp4"
+   (mis automatiquement dans media dans cet ordre : image, vidéo)
+   ════════════════════════════════════════════════════════════════════ */
+
+const PRODUCTS = [
+  {
+    id: 1,
+    name: "Produit exemple 1",
+    cat: "Catégorie A",
+    price: 50,
+    media: [
+      { type: "image", src: "images/produit-1.jpg" },
+      { type: "video", src: "videos/produit-1.mp4" },
+      { type: "image", src: "images/produit-2.jpg" }
+    ],
+    variants: [
+      { label: "10G — 50 €",  price: 50  },
+      { label: "20G — 100 €", price: 100 },
+      { label: "50G — 220 €", price: 220 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  },
+  {
+    id: 2,
+    name: "Produit exemple 2",
+    cat: "Catégorie A",
+    price: 70,
+    media: [
+      { type: "image", src: "images/produit-3.jpg" },
+      { type: "video", src: "videos/produit-2.mp4" },
+      { type: "image", src: "images/produit-4.jpg" }
+    ],
+    variants: [
+      { label: "10G — 70 €",  price: 70  },
+      { label: "50G — 300 €", price: 300 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  },
+  {
+    id: 3,
+    name: "Produit exemple 3",
+    cat: "Catégorie B",
+    price: 30,
+    media: [
+      { type: "image", src: "images/produit-5.jpg" },
+      { type: "video", src: "videos/produit-3.mp4" }
+    ],
+    variants: [
+      { label: "1G — 30 €",   price: 30  },
+      { label: "5G — 100 €",  price: 100 },
+      { label: "10G — 140 €", price: 140 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  },
+  {
+    id: 4,
+    name: "Produit exemple 4",
+    cat: "Catégorie B",
+    price: 80,
+    media: [
+      { type: "image", src: "images/produit-6.jpg" },
+      { type: "video", src: "videos/produit-4.mp4" },
+      { type: "image", src: "images/produit-7.jpg" }
+    ],
+    variants: [
+      { label: "5G — 80 €",    price: 80  },
+      { label: "10G — 150 €",  price: 150 },
+      { label: "25G — 250 €",  price: 250 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  },
+  {
+    id: 5,
+    name: "Produit exemple 5",
+    cat: "Catégorie C",
+    price: 100,
+    media: [
+      { type: "image", src: "images/produit-8.jpg" },
+      { type: "image", src: "images/produit-9.jpg" },
+      { type: "video", src: "videos/produit-5.mp4" }
+    ],
+    variants: [
+      { label: "5G — 100 €",   price: 100  },
+      { label: "25G — 300 €",  price: 300  },
+      { label: "100G — 1000 €", price: 1000 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  },
+  {
+    id: 6,
+    name: "Produit exemple 6",
+    cat: "Catégorie C",
+    price: 60,
+    media: [
+      { type: "image", src: "images/produit-10.jpg" },
+      { type: "video", src: "videos/produit-6.mp4" },
+      { type: "image", src: "images/produit-11.jpg" }
+    ],
+    variants: [
+      { label: "1G — 60 €",  price: 60  },
+      { label: "3G — 160 €", price: 160 },
+      { label: "5G — 300 €", price: 300 }
+    ],
+    desc: "Description du produit. Remplace ce texte."
+  }
+];
+
+/* ════════════════════════════════════════════════════════════════════
+   2.  RÉGLAGES
+   ════════════════════════════════════════════════════════════════════ */
+
+// Lien Telegram du bouton CONTACT
+const TELEGRAM_URL = "https://t.me/mon_compte";
+
+// Webhook (Make, Zapier, n8n…) qui reçoit les commandes. "" = aucun envoi.
+const ORDER_WEBHOOK_URL = "";
+
+/* ════════════════════════════════════════════════════════════════════
+   3.  MOTEUR  ·  rien à toucher en dessous
+   ════════════════════════════════════════════════════════════════════ */
+
+// Normalise chaque produit une seule fois : media[], preview, searchText
+const catalog = PRODUCTS.map((p, index) => {
+  let media = [];
+
+  if (Array.isArray(p.media) && p.media.length) {
+    media = p.media.map(m =>
+      typeof m === "string" ? { type: "image", src: m } : m
+    );
+  } else {
+    if (p.image) media.push({ type: "image", src: p.image });
+    if (p.video) media.push({ type: "video", src: p.video });
+  }
+
+  return {
+    ...p,
+    id: Number(p.id),
+    _order: index,
+    media,
+    preview: media.length ? media[0].src : ""
+  };
+});
+
+const products = catalog;
+
+let cart = {};
+
+const euros = n => n.toLocaleString("fr-FR", {
+  style: "currency",
+  currency: "EUR"
+});
+
+const escapeHTML = value =>
+  String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const priceOf = product =>
+  product.variants && product.variants.length
+    ? Number(product.variants[0].price)
+    : Number(product.price);
+
+/* ── Filtres générés depuis les catégories réellement présentes ── */
+function renderCategories() {
+  const select = document.getElementById("category");
+  const cats = [...new Set(catalog.map(p => p.cat).filter(Boolean))];
+
+  const current = select.value || "all";
+
+  select.innerHTML =
+    '<option value="all">Toutes catégories</option>' +
+    cats.map(c => `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
+
+  if ([...select.options].some(o => o.value === current)) select.value = current;
+}
+
+/* ── Catégorie → icône de la vignette de repli ── */
+function iconForCategory(cat) {
+  const key = String(cat || "").toLowerCase();
+
+  if (key.includes("choco")) return "🍫";
+  if (key.includes("weed") || key.includes("fleur")) return "🍀";
+  if (key.includes("neige")) return "❄️";
+  if (key.includes("synth") || key.includes("labo")) return "🧪";
+  if (key.includes("mousse")) return "🧽";
+  if (key.includes("boisson") || key.includes("drink")) return "🥤";
+  if (key.includes("vetement") || key.includes("textile")) return "👕";
+  if (key.includes("accessoire")) return "🎧";
+
+  return "📦";
+}
+
+/* ── Grille produit ── */
+function renderProducts() {
+  const category = document.getElementById("category").value;
+  const sort = document.getElementById("sort").value;
+
+  let list = catalog.filter(p => category === "all" || p.cat === category);
+
+  if (sort === "low") {
+    list = [...list].sort((a, b) => priceOf(a) - priceOf(b) || a._order - b._order);
+  } else if (sort === "high") {
+    list = [...list].sort((a, b) => priceOf(b) - priceOf(a) || a._order - b._order);
+  } else {
+    list = [...list].sort((a, b) =>
+      (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || a._order - b._order
+    );
+  }
+
+  document.getElementById("product-count").textContent =
+    list.length + " produit(s)";
+
+  const grid = document.getElementById("products");
+
+  if (!list.length) {
+    grid.innerHTML =
+      '<div class="empty" style="grid-column:1/-1">Aucun produit dans cette catégorie.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <article class="product">
+      <div class="photo" onclick="openProduct(${p.id})">
+        ${
+          p.preview
+            ? `<img src="${escapeHTML(p.preview)}" alt="${escapeHTML(p.name)}"
+                 onerror="this.parentNode.innerHTML='<span class=\\'thumb-icon\\'>${iconForCategory(p.cat)}</span>'">`
+            : `<span class="thumb-icon">${iconForCategory(p.cat)}</span>`
+        }
+        ${p.media.length > 1 ? `<span class="media-badge">◎ ${p.media.length}</span>` : ""}
+      </div>
+
+      <div class="product-info">
+        <h3>${escapeHTML(p.name)}</h3>
+
+        ${
+          p.variants && p.variants.length
+            ? `
+              <label for="variant-${p.id}">Choisir un format</label>
+              <select id="variant-${p.id}"
+                onchange="document.getElementById('price-${p.id}').textContent =
+                euros(Number(this.value))">
+                ${p.variants.map((v, i) => `
+                  <option value="${Number(v.price)}" ${i === 0 ? "selected" : ""}>
+                    ${escapeHTML(v.label)}
+                  </option>
+                `).join("")}
+              </select>
+              <div class="price" id="price-${p.id}">
+                ${euros(Number(p.variants[0].price))}
+              </div>
+            `
+            : `<div class="price">${euros(Number(p.price))}</div>`
+        }
+
+        <button class="add" onclick="add(${p.id}, 'catalog')">＋ Ajouter</button>
+        <button class="outline" onclick="openProduct(${p.id})">Voir le produit</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+/* ── Panier ── */
+function add(id, source = "catalog") {
+  const product = catalog.find(p => p.id === Number(id));
+  if (!product) return;
+
+  let variantIndex = -1;
+
+  if (product.variants && product.variants.length) {
+    const selectorId = source === "detail"
+      ? "detail-variant"
+      : `variant-${product.id}`;
+    const selector = document.getElementById(selectorId);
+    variantIndex = selector ? selector.selectedIndex : 0;
+  }
+
+  const variant = variantIndex >= 0 ? product.variants[variantIndex] : null;
+  const price = variant ? Number(variant.price) : Number(product.price);
+  const variantLabel = variant ? variant.label : "Format standard";
+  const key = `${product.id}_${variantIndex >= 0 ? variantIndex : "base"}`;
+
+  if (!cart[key]) {
+    cart[key] = { id: product.id, quantity: 0, price, variantLabel };
+  }
+
+  cart[key].quantity += 1;
+  updateCart();
+}
+
+function change(key, delta) {
+  if (!cart[key]) return;
+  cart[key].quantity += delta;
+  if (cart[key].quantity <= 0) delete cart[key];
+  updateCart();
+}
+
+function total() {
+  return Object.values(cart).reduce((sum, i) => sum + i.price * i.quantity, 0);
+}
+
+function updateCart() {
+  const count = Object.values(cart).reduce((s, i) => s + i.quantity, 0);
+
+  document.getElementById("cart-count").textContent = count;
+  document.getElementById("dock-count").textContent = count;
+
+  const entries = Object.entries(cart);
+
+  document.getElementById("cart-lines").innerHTML = entries.length
+    ? entries.map(([key, item]) => {
+        const product = catalog.find(p => p.id === item.id);
+        if (!product) return "";
+
+        return `
+          <div class="line">
+            <div>
+              <strong>${escapeHTML(product.name)}</strong>
+              <div class="muted">
+                ${escapeHTML(item.variantLabel)} · ${euros(item.price)} / unité
+              </div>
+            </div>
+            <div class="qty">
+              <button onclick="change('${key}', -1)">−</button>
+              ${item.quantity}
+              <button onclick="change('${key}', 1)">+</button>
+            </div>
+            <strong>${euros(item.price * item.quantity)}</strong>
+          </div>
+        `;
+      }).join("")
+    : '<div class="empty">Ton panier est vide.</div>';
+
+  document.getElementById("cart-total").textContent = euros(total());
+  document.getElementById("checkout-total").textContent = euros(total());
+}
+
+/* ── Navigation entre les vues ── */
+function showView(view) {
+  document.querySelectorAll(".view").forEach(el => {
+    el.classList.toggle("active", el.id === view);
+  });
+
+  document.querySelectorAll(".dock button").forEach(el => {
+    el.classList.toggle("active", el.dataset.view === view);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goCheckout() {
+  if (!Object.keys(cart).length) {
+    alert("Ajoute un produit au panier.");
+    showView("home");
+    return;
+  }
+
+  showView("checkout");
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   4.  FICHE PRODUIT  ·  galerie photo + vidéo qui défile
+   ════════════════════════════════════════════════════════════════════
+   Chaque page de la galerie = une diapo. On glisse au doigt (ou au
+   trackpad), les points en bas indiquent la page, les flèches aussi.
+   La vidéo ne démarre jamais toute seule : elle se met en pause quand
+   on va sur une autre diapo.
+   ════════════════════════════════════════════════════════════════════ */
+
+function slideHTML(item, index) {
+  if (item.type === "video") {
+    return `
+      <div class="slide" data-index="${index}">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          src="${escapeHTML(item.src)}"
+        ></video>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="slide" data-index="${index}">
+      <img
+        src="${escapeHTML(item.src)}"
+        alt=""
+        loading="lazy"
+        onerror="this.parentNode.classList.add('slide-error')"
+      >
+    </div>
+  `;
+}
+
+function openProduct(id) {
+  const product = catalog.find(p => p.id === Number(id));
+  if (!product) return;
+
+  const media = product.media || [];
+  const multi = media.length > 1;
+
+  const galleryHTML = media.length
+    ? `
+      <div class="gallery${multi ? " is-multi" : ""}" id="gallery">
+        <div class="track" id="gallery-track">
+          ${media.map(slideHTML).join("")}
+        </div>
+
+        ${
+          multi
+            ? `
+              <button class="arrow prev" onclick="goSlide(galleryIndex - 1)" aria-label="Précédent">‹</button>
+              <button class="arrow next" onclick="goSlide(galleryIndex + 1)" aria-label="Suivant">›</button>
+              <div class="dots" id="gallery-dots">
+                ${media.map((_, i) => `
+                  <button class="dot${i === 0 ? " active" : ""}"
+                          onclick="goSlide(${i})" aria-label="Page ${i + 1}"></button>
+                `).join("")}
+              </div>
+              <div class="page-count" id="gallery-count">1/${media.length}</div>
+            `
+            : ""
+        }
+      </div>
+    `
+    : `
+      <div class="photo" style="border-radius:14px;height:220px">
+        <span class="thumb-icon">${iconForCategory(product.cat)}</span>
+      </div>
+    `;
+
+  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
+
+  const variantsHTML = hasVariants
+    ? `
+      <label for="detail-variant">Choisir un format</label>
+      <select
+        id="detail-variant"
+        onchange="document.getElementById('detail-price').textContent =
+          euros(Number(this.value))"
+      >
+        ${product.variants.map((v, i) => `
+          <option value="${Number(v.price)}" ${i === 0 ? "selected" : ""}>
+            ${escapeHTML(v.label)}
+          </option>
+        `).join("")}
+      </select>
+
+      <div class="price" id="detail-price">
+        ${euros(Number(product.variants[0].price))}
+      </div>
+    `
+    : `<div class="price">${euros(Number(product.price))}</div>`;
+
+  document.getElementById("product-detail").innerHTML = `
+    ${galleryHTML}
+
+    <div class="eyebrow" style="margin-top:16px">FICHE PRODUIT</div>
+
+    <h2>${escapeHTML(product.name)}</h2>
+
+    ${product.cat ? `<div class="muted">${escapeHTML(product.cat)}</div>` : ""}
+
+    <p>${escapeHTML(product.desc || "")}</p>
+
+    ${variantsHTML}
+
+    <button class="primary"
+      onclick="add(${product.id}, 'detail'); closeProduct()">
+      Ajouter au panier
+    </button>
+  `;
+
+  document.getElementById("product-modal").classList.add("show");
+  document.body.classList.add("modal-open");
+
+  initGallery();
+}
+
+function closeProduct() {
+  document.getElementById("product-modal").classList.remove("show");
+  document.body.classList.remove("modal-open");
+  pauseGalleryVideo();
+  stopGalleryAutoplay();
+}
+
+/* ── Diaporama ── */
+let galleryIndex = 0;
+let galleryPages = 1;
+let autoplayTimer = null;
+
+function initGallery() {
+  const track = document.getElementById("gallery-track");
+  if (!track) return;
+
+  galleryIndex = 0;
+  galleryPages = track.querySelectorAll(".slide").length;
+
+  track.scrollLeft = 0;
+  syncGallery();
+
+  // Le défilement natif (doigt / trackpad) met les points à jour
+  track.addEventListener("scroll", () => {
+    if (!galleryPages) return;
+
+    const index = Math.round(track.scrollLeft / track.clientWidth);
+
+    if (index !== galleryIndex) {
+      galleryIndex = Math.min(Math.max(index, 0), galleryPages - 1);
+      pauseGalleryVideo();
+      syncGallery();
+    }
+  }, { passive: true });
+
+  // Flèches clavier
+  document.addEventListener("keydown", galleryKeydown);
+
+  // Défilement automatique (désactivable, voir AUTOPLAY_MS)
+  startGalleryAutoplay();
+}
+
+const AUTOPLAY_MS = 0; // 0 = pas de défilement auto. 4000 = une diapo toutes les 4 s.
+
+function startGalleryAutoplay() {
+  stopGalleryAutoplay();
+  if (!AUTOPLAY_MS || galleryPages < 2) return;
+
+  autoplayTimer = setInterval(() => {
+    const track = document.getElementById("gallery-track");
+    if (!track) return stopGalleryAutoplay();
+    if (track.querySelector("video") &&
+        [...track.querySelectorAll("video")].some(v => !v.paused)) return;
+
+    goSlide(galleryIndex + 1);
+  }, AUTOPLAY_MS);
+}
+
+function stopGalleryAutoplay() {
+  if (autoplayTimer) clearInterval(autoplayTimer);
+  autoplayTimer = null;
+}
+
+function goSlide(index) {
+  const track = document.getElementById("gallery-track");
+  if (!track || !galleryPages) return;
+
+  if (index < 0) index = galleryPages - 1;
+  if (index > galleryPages - 1) index = 0;
+
+  galleryIndex = index;
+  pauseGalleryVideo();
+
+  track.scrollTo({ left: track.clientWidth * index, behavior: "smooth" });
+  syncGallery();
+}
+
+function syncGallery() {
+  const dots = document.querySelectorAll("#gallery-dots .dot");
+  dots.forEach((d, i) => d.classList.toggle("active", i === galleryIndex));
+
+  const counter = document.getElementById("gallery-count");
+  if (counter) counter.textContent = `${galleryIndex + 1}/${galleryPages}`;
+}
+
+function pauseGalleryVideo() {
+  document.querySelectorAll("#gallery-track video").forEach(v => {
+    if (!v.paused) v.pause();
+  });
+}
+
+function galleryKeydown(event) {
+  const modal = document.getElementById("product-modal");
+  if (!modal || !modal.classList.contains("show")) return;
+
+  if (event.key === "ArrowLeft") goSlide(galleryIndex - 1);
+  if (event.key === "ArrowRight") goSlide(galleryIndex + 1);
+  if (event.key === "Escape") closeProduct();
+}
+
+/* ── Envoi de commande ── */
+document.getElementById("order-form").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!Object.keys(cart).length) {
+    alert("Ajoute un produit au panier.");
+    showView("home");
+    return;
+  }
+
+  const order = {
+    customer: document.getElementById("customer").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    delivery: document.getElementById("delivery").value,
+    notes: document.getElementById("notes").value.trim(),
+
+    items: Object.values(cart).map(item => {
+      const product = catalog.find(p => p.id === item.id);
+      return {
+        product: product ? product.name : "",
+        variant: item.variantLabel,
+        price: item.price,
+        quantity: item.quantity,
+        subtotal: item.price * item.quantity
+      };
+    }),
+
+    total: total(),
+    currency: "EUR",
+    createdAt: new Date().toISOString()
+  };
+
+  if (!ORDER_WEBHOOK_URL) {
+    console.log("Commande (webhook non configuré) :", order);
+    alert("Commande enregistrée localement. Renseigne ORDER_WEBHOOK_URL pour l'envoyer.");
+    cart = {};
+    updateCart();
+    event.target.reset();
+    showView("home");
+    return;
+  }
+
+  const button = event.target.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = "Envoi en cours…";
+
+  fetch(ORDER_WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: new URLSearchParams({ order: JSON.stringify(order) })
+  })
+    .then(() => {
+      alert("Demande envoyée");
+      cart = {};
+      updateCart();
+      event.target.reset();
+      showView("home");
+    })
+    .catch(() => alert("Envoi impossible"))
+    .finally(() => {
+      button.disabled = false;
+      button.textContent = "Envoyer ma demande";
+    });
+});
+
+/* ── Avis ── */
+document.getElementById("review-form").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = document.getElementById("review-name").value.slice(0, 40);
+  const score = Number(document.getElementById("review-score").value);
+  const text = document.getElementById("review-text").value.slice(0, 400);
+
+  document.getElementById("new-reviews").insertAdjacentHTML(
+    "afterbegin",
+    `<div class="review">
+       <div class="stars">${"★".repeat(score)}${"☆".repeat(5 - score)}</div>
+       <strong>${escapeHTML(name)}</strong>
+       <p>${escapeHTML(text)}</p>
+       <span class="muted">Avis local de démonstration</span>
+     </div>`
+  );
+
+  event.target.reset();
+});
+
+/* ── Départ ── */
+document.querySelectorAll('a[href="https://t.me/"]').forEach(a => {
+  a.href = TELEGRAM_URL;
+});
+
+if (!catalog.length) {
+  document.getElementById("home").classList.add("empty-state");
+}
+
+renderCategories();
+renderProducts();
+updateCart();
+</script>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+  if (window.Telegram && window.Telegram.WebApp) {
+    const app = window.Telegram.WebApp;
+    app.ready();
+    app.expand();
+
+    if (typeof app.requestFullscreen === "function") {
+      app.requestFullscreen();
+    }
+  }
+</script>
+</body>
+</html>
